@@ -2,9 +2,8 @@
 {
     public enum RouteType
     {
-        Unknown = 0,
-        Unique = 1,
-        Multiple = 2,
-        MultipleAndReturn = 3,
+        Unique = 0,
+        Multiple = 1,
+        MultipleAndReturn = 2,
     }
 }

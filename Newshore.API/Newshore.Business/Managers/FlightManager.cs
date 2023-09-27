@@ -6,6 +6,7 @@ using Newshore.DataAccess.Interfaces;
 using Newshore.EF.Interfaces;
 using Newshore.EF.Entities;
 using Newtonsoft.Json;
+using Newshore.DataAccess.Models;
 
 namespace Newshore.Business.Managers
 {
@@ -20,21 +21,35 @@ namespace Newshore.Business.Managers
             _searchRegistryRepository = searchRegistryRepository;
         }
 
-        public async Task<Journey> GetJourneyAsync(string origin, string destination)
+        public async Task<Journey> GetJourneyAsync(string origin, string destination, bool isRoundTrip)
         {
-            var cacheData = _searchRegistryRepository.Filter(x => x.Origin == origin && x.Destination == destination);
+            var cacheData = _searchRegistryRepository.Filter(x => x.Origin == origin && x.Destination == destination && x.IsRoundTrip == isRoundTrip);
             if (cacheData.Any())
             {
                 SearchRegistry data = cacheData.First();
-                return JsonConvert.DeserializeObject<Journey>(data.Content);
+                var convertedData = JsonConvert.DeserializeObject<Journey>(data.Content);
+                convertedData.IsCache = true;
+                convertedData.CacheDate = data.RegistryDate;
+                return convertedData;
             }
 
-            var result = await _newshoreAPI.GetFlightsAsync(RouteType.Unique);
-            var flights = result.Where(x => x.DepartureStation == origin && x.ArrivalStation == destination).ToList();
-
-            if (flights == null || !flights.Any())
+            var flights = new List<FlightRecord>();
+            var result = await _newshoreAPI.GetFlightsAsync(RouteType.MultipleAndReturn);
+            var departureFlights = result.Where(x => x.DepartureStation == origin && x.ArrivalStation == destination).ToList();
+            if (departureFlights == null || !departureFlights.Any())
             {
                 throw new BusinessException("Your query cannot be processed");
+            }
+            flights.AddRange(departureFlights);
+            
+            if (isRoundTrip)
+            {
+                var arrivalFlights = result.Where(x => x.DepartureStation == destination && x.ArrivalStation == origin).ToList();
+                if (arrivalFlights == null || !arrivalFlights.Any())
+                {
+                    throw new BusinessException("Your query cannot be processed");
+                }
+                flights.AddRange(arrivalFlights);
             }
 
             var journey = new Journey();
@@ -58,6 +73,7 @@ namespace Newshore.Business.Managers
             registry.Destination = destination;
             registry.RegistryDate = DateTime.UtcNow;
             registry.Content = JsonConvert.SerializeObject(journey);
+            registry.IsRoundTrip = isRoundTrip;
 
             _searchRegistryRepository.Add(registry);
             _searchRegistryRepository.Complete();

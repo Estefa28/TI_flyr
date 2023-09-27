@@ -8,10 +8,12 @@ namespace Newshore.DataAccess.API
 {
     public class NewshoreAPI : INewshoreAPI
     {
+        const string APIUrl = "https://recruiting-api.newshore.es/api/flights/";
+
         public async Task<List<FlightRecord>> GetFlightsAsync(RouteType routeType)
         {
             var client = new HttpClient();
-            var response = await client.GetAsync("https://recruiting-api.newshore.es/api/flights/0");
+            var response = await client.GetAsync($"{APIUrl}{(int)routeType}");
 
             if (response.IsSuccessStatusCode)
             {

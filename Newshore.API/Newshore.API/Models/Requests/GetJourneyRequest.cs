@@ -10,5 +10,7 @@ namespace Newshore.API.Models.Requests
         [Required]
         [StringLength(3, MinimumLength = 3)]
         public string Destination { get; set; }
+        [Required]
+        public bool IsRoundTrip { get; set; }
     }
 }

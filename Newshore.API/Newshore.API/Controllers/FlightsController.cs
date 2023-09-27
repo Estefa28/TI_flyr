@@ -20,8 +20,8 @@ namespace Newshore.API.Controllers
         [Route("search")]
         public async Task<ActionResult<Journey>> GetJourneyAsync([FromQuery] GetJourneyRequest request)
         {
-            var result = await _flightManager.GetJourneyAsync(request.Origin.ToUpper(), request.Destination.ToUpper());
-            return Ok(result);
+            var result = await _flightManager.GetJourneyAsync(request.Origin.ToUpper(), request.Destination.ToUpper(), request.IsRoundTrip);
+            return Ok(result);            
         }
     }
 }

@@ -4,6 +4,6 @@ namespace Newshore.Business.Interfaces
 {
     public interface IFlightManager
     {
-        Task<Journey> GetJourneyAsync(string origin, string destination);  
+        Task<Journey> GetJourneyAsync(string origin, string destination, bool isRoundTrip);  
     }
 }
