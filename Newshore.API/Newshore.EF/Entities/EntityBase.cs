@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Newshore.Domain.Models
+namespace Newshore.EF.Entities
 {
     public abstract class EntityBase
     {

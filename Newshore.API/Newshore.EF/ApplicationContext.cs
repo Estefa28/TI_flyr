@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Newshore.Domain.Models;
 using Newshore.EF.Configurations;
+using Newshore.EF.Entities;
 
 namespace Newshore.EF
 {
@@ -16,9 +16,7 @@ namespace Newshore.EF
 
         #region Data Sets
 
-        public DbSet<Journey> Journeys { get; set; }
-        public DbSet<Flight> Flights { get; set; }
-        public DbSet<Transport> Transport { get; set; }
+        public DbSet<SearchRegistry> SearchRegistries { get; set; }
 
         #endregion
 
@@ -26,7 +24,7 @@ namespace Newshore.EF
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
-            modelBuilder.ApplyConfiguration(new JourneyConfig());
+            modelBuilder.ApplyConfiguration(new SearchRegistryConfig());
         }
     }
 }

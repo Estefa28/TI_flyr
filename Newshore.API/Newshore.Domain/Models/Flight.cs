@@ -2,7 +2,7 @@
 
 namespace Newshore.Domain.Models
 {
-    public class Flight: EntityBase
+    public class Flight
     {
         public Transport Transport { get; set; }
         public string Origin { get; set; }
