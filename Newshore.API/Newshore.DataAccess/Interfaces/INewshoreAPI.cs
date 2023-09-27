@@ -1,5 +1,5 @@
 ﻿using Newshore.DataAccess.Enums;
-using Newshore.Domain.Models;
+using Newshore.DataAccess.Models;
 
 namespace Newshore.DataAccess.Interfaces
 {

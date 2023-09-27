@@ -1,3 +1,4 @@
+using Newshore.API.Extensions;
 using Newshore.Business.Interfaces;
 using Newshore.Business.Managers;
 using Newshore.DataAccess.API;
@@ -17,6 +18,8 @@ namespace Newshore.API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.ConfigureEF(builder.Configuration);
+
             builder.Services.AddSingleton<IFlightManager, FlightManager>();
             builder.Services.AddSingleton<INewshoreAPI, NewshoreAPI>();
 

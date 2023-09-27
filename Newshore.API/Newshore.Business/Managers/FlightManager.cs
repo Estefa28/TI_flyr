@@ -1,6 +1,6 @@
 ﻿using Newshore.Business.Exceptions;
 using Newshore.Business.Interfaces;
-using Newshore.Business.Models;
+using Newshore.Domain.Models;
 using Newshore.DataAccess.Enums;
 using Newshore.DataAccess.Interfaces;
 

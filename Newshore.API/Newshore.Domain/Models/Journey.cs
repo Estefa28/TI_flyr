@@ -1,6 +1,7 @@
-﻿namespace Newshore.Business.Models
+﻿
+namespace Newshore.Domain.Models
 {
-    public class Journey
+    public class Journey: EntityBase
     {
         public List<Flight> Flights { get; set; }
         public string Origin { get; set; }

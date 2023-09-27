@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newshore.Business.Interfaces;
-using Newshore.Business.Models;
+using Newshore.Domain.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Newshore.API.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class FlightsController : ControllerBase
     {
         private readonly IFlightManager _flightManager;
@@ -17,7 +18,7 @@ namespace Newshore.API.Controllers
 
         [HttpGet]
         [Route("search")]
-        public async Task<ActionResult<Journey>> GetJourneyAsync([Required]string origin, [Required]string destination)
+        public async Task<ActionResult<Journey>> GetJourneyAsync([Required]string origin = "MZL", [Required]string destination = "MDE")
         {
             var result = await _flightManager.GetJourneyAsync(origin, destination);
             return Ok(result);

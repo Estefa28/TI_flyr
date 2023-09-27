@@ -1,8 +1,8 @@
 ﻿using System.Net;
 
-namespace Newshore.Business.Models
+namespace Newshore.Domain.Models
 {
-    public class Flight
+    public class Flight: EntityBase
     {
         public Transport Transport { get; set; }
         public string Origin { get; set; }

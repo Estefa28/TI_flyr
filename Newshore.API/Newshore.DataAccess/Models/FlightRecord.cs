@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Newshore.Domain.Models
+namespace Newshore.DataAccess.Models
 {
     public class FlightRecord
     {

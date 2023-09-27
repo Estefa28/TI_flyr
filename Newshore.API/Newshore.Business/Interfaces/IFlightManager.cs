@@ -1,4 +1,4 @@
-﻿using Newshore.Business.Models;
+﻿using Newshore.Domain.Models;
 
 namespace Newshore.Business.Interfaces
 {
