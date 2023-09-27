@@ -20,7 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Newshore.Business\Newshore.Business.csproj" />
     <ProjectReference Include="..\Newshore.Domain\Newshore.Domain.csproj" />
-    <ProjectReference Include="..\Newshore.EF\Newshore.EF.csproj" />
   </ItemGroup>
 
 </Project>

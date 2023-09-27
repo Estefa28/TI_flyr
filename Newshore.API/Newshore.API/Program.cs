@@ -3,6 +3,8 @@ using Newshore.Business.Interfaces;
 using Newshore.Business.Managers;
 using Newshore.DataAccess.API;
 using Newshore.DataAccess.Interfaces;
+using Newshore.EF.Interfaces;
+using Newshore.EF.Repositories;
 
 namespace Newshore.API
 {
@@ -20,8 +22,9 @@ namespace Newshore.API
             builder.Services.AddSwaggerGen();
             builder.Services.ConfigureEF(builder.Configuration);
 
-            builder.Services.AddSingleton<IFlightManager, FlightManager>();
-            builder.Services.AddSingleton<INewshoreAPI, NewshoreAPI>();
+            builder.Services.AddTransient<ISearchRegistryRepository, SearchRegistryRepository>();
+            builder.Services.AddTransient<INewshoreAPI, NewshoreAPI>();
+            builder.Services.AddTransient<IFlightManager, FlightManager>();
 
             var app = builder.Build();
 

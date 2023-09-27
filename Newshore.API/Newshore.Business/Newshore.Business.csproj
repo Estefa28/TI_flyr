@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Newshore.DataAccess\Newshore.DataAccess.csproj" />
+    <ProjectReference Include="..\Newshore.Domain\Newshore.Domain.csproj" />
+    <ProjectReference Include="..\Newshore.EF\Newshore.EF.csproj" />
   </ItemGroup>
 
 </Project>

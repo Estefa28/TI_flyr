@@ -1,4 +1,5 @@
 ﻿using Newshore.DataAccess.Enums;
+using Newshore.DataAccess.Exceptions;
 using Newshore.DataAccess.Interfaces;
 using Newshore.DataAccess.Models;
 using Newtonsoft.Json;
@@ -18,25 +19,7 @@ namespace Newshore.DataAccess.API
                 return JsonConvert.DeserializeObject<List<FlightRecord>>(content);
             }
 
-            return new List<FlightRecord>
-            {
-                new FlightRecord
-                {
-                    DepartureStation = "MZL",
-                    ArrivalStation = "BCN",
-                    Price = 1000,
-                    FlightCarrier = "AA",
-                    FlightNumber = "123"
-                },
-                new FlightRecord
-                {
-                    DepartureStation = "MZL",
-                    ArrivalStation = "BCN",
-                    Price = 1500,
-                    FlightCarrier = "AA",
-                    FlightNumber = "001"
-                }
-            };
+            throw new DataAccessException("No data found");
         }
     }
 }
