@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newshore.API.Models.Requests;
 using Newshore.Business.Interfaces;
 using Newshore.Domain.Models;
-using System.ComponentModel.DataAnnotations;
 
 namespace Newshore.API.Controllers
 {
@@ -18,9 +18,9 @@ namespace Newshore.API.Controllers
 
         [HttpGet]
         [Route("search")]
-        public async Task<ActionResult<Journey>> GetJourneyAsync([Required]string origin = "MZL", [Required]string destination = "MDE")
+        public async Task<ActionResult<Journey>> GetJourneyAsync([FromQuery] GetJourneyRequest request)
         {
-            var result = await _flightManager.GetJourneyAsync(origin, destination);
+            var result = await _flightManager.GetJourneyAsync(request.Origin.ToUpper(), request.Destination.ToUpper());
             return Ok(result);
         }
     }

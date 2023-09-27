@@ -9,8 +9,10 @@ namespace Newshore.EF.Entities
         [Required]
         public string Content { get; set; }
         [Required]
+        [StringLength(3,MinimumLength = 3)]
         public string Origin { get; set; }
         [Required]
+        [StringLength(3, MinimumLength = 3)]
         public string Destination { get; set; }
     }
 }
